@@ -1,7 +1,8 @@
 ---
 title: test third
-date: 2017-07-28 14:38:52
-tags:
+date: {}
+tags: null
+published: true
 ---
 测试3 图片
 
@@ -9,3 +10,6 @@ tags:
 
 ![](/img/fold.png)
 ![](/img/next.png)
+
+
+![测试]({{site.baseurl}}/source/_posts/test.png)
