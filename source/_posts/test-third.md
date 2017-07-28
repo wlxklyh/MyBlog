@@ -12,4 +12,4 @@ published: true
 ![](/img/next.png)
 
 
-![测试]({{site.baseurl}}/source/_posts/test.png)
+![测试](/source/_posts/test.png)
