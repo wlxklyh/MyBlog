@@ -2,7 +2,7 @@
 title: test third
 date: {}
 tags: null
-published: true
+published: false
 ---
 测试3 图片
 
@@ -12,4 +12,5 @@ published: true
 ![](/img/next.png)
 
 
-![测试](/source/_posts/test.png)
+![test](/source/img/test.png)
+
