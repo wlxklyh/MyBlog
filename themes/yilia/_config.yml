@@ -1,23 +1,22 @@
 # Header
 
 menu:
-  主页: /
+  主页: https://wlxklyh.github.io/
   随笔: /tags/随笔/
-
 # SubNav
 subnav:
-  github: "#"
-  weibo: "#"
-  rss: "#"
-  zhihu: "#"
-  #qq: "#"
-  #weixin: "#"
+  github: "https://github.com/wlxklyh"
+  #weibo: "#"
+  #rss: "#"
+  zhihu: "https://www.zhihu.com/people/wlxk/activities"
+  #qq: "1282836127"
+  #weixin: "linyanhou"
   #jianshu: "#"
   #douban: "#"
   #segmentfault: "#"
   #bilibili: "#"
   #acfun: "#"
-  #mail: "mailto:litten225@qq.com"
+  #mail: "linyanhou@qq.com"
   #facebook: "#"
   #google: "#"
   #twitter: "#"
@@ -43,7 +42,7 @@ open_in_new: false
 
 # 打赏
 # 打赏type设定：0-关闭打赏； 1-文章对应的md文件里有reward:true属性，才有打赏； 2-所有文章均有打赏
-reward_type: 2
+reward_type: 1
 # 打赏wording
 reward_wording: '谢谢你请我吃糖果'
 # 支付宝二维码图片地址，跟你设置头像的方式一样。比如：/assets/img/alipay.jpg
@@ -65,10 +64,10 @@ top: true
 # Miscellaneous
 baidu_analytics: ''
 google_analytics: ''
-favicon: /favicon.png
+favicon: /img/header.jpg
 
 #你的头像url
-avatar:
+avatar: /img/header.jpg
 
 #是否开启分享
 share_jia: true
@@ -107,16 +106,16 @@ slider:
 #smart_menu:
 #  friends: false
 smart_menu:
-  innerArchive: '所有文章'
+  innerArchive: false
   friends: '友链'
   aboutme: '关于我'
 
 friends:
-  友情链接1: http://localhost:4000/
-  友情链接2: http://localhost:4000/
-  友情链接3: http://localhost:4000/
-  友情链接4: http://localhost:4000/
-  友情链接5: http://localhost:4000/
-  友情链接6: http://localhost:4000/
+  #友情链接1: http://localhost:4000/
+  #友情链接2: http://localhost:4000/
+  #友情链接3: http://localhost:4000/
+  #友情链接4: http://localhost:4000/
+  #友情链接5: http://localhost:4000/
+  #友情链接6: http://localhost:4000/
 
-aboutme: 很惭愧<br><br>只做了一点微小的工作<br>谢谢大家
+aboutme: hawk<br><br>写点东西记录一下<br>谢谢大家
