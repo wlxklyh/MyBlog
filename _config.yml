@@ -74,6 +74,11 @@ deploy:
   repository: https://github.com/wlxklyh/wlxklyh.github.io  #部署的仓库的SSH
   branch: master   #部署分支,一般使用master主分支
 
+auto_excerpt:
+  enable: true
+  length: 150
+
+
 jsonContent:
     meta: false
     pages: false
