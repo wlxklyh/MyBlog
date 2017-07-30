@@ -7,6 +7,7 @@ before_install:
   - export TZ='Asia/Shenzhen'
   - npm install hexo-cli -g
   - npm install hexo-asset-image --save
+  - npm rebuild
   
 install:
   - npm install
