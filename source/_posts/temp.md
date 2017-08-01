@@ -44,5 +44,29 @@ http://www.jianshu.com/p/8c353abb42e4
 1、 Resource.load
 2、
 
-## 10、
+## 10、物理更新适合放在 FixedUpdate
+
+## 11、游戏场景中放置多个 Camera会可能到混合
+
+## 12、有些有哪些动画类型
+关节动画 骨骼动画  关键帧动画
+
+## 13、diffuse 光照计算公式
+diffuse = kd * colorlight * max(0,N*L)
+
+
+## 14、两种阴影判断的方法和工作原理
+
+
+
+
+
+
+
+
+
+
+
+
+
 
