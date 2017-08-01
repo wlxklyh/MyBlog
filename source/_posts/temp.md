@@ -1,7 +1,8 @@
 ---
 title: temp
-date: 2017-08-01 9:49:39
+date: 2017-08-01T00:00:00.000Z
 tags: unity
+published: false
 ---
 # unity 问题
 
@@ -56,17 +57,3 @@ diffuse = kd * colorlight * max(0,N*L)
 
 
 ## 14、两种阴影判断的方法和工作原理
-
-
-
-
-
-
-
-
-
-
-
-
-
-
