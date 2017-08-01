@@ -2,9 +2,12 @@
 title: temp
 date: {}
 tags: null
-published: true
+published: false
 ---
 # unity 问题
+
+看网络上的问题 记录一下
+<!-- more -->
 
 ## 1、协同程序 
 一般用于控制运动 序列以及对象的行为
