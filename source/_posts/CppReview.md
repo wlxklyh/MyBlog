@@ -8,9 +8,10 @@ published: true
 # 复习C++ 
 
 回顾复习下C++的一些知识~
+重新看下大学时候自己写的博客，做了些实验来验证C++的知识点：http://blog.csdn.net/linyanhou/article/details/40153521
+
 <!-- more -->
 
-大学写的博客做了些实验 验证C++的知识点：http://blog.csdn.net/linyanhou/article/details/40153521
 
 ### 1、虚函数实现机制
 Class A(){
@@ -89,6 +90,43 @@ int main()
 第二是这句：printf( "A constructor\n" );  输出A constructor
 第三句是这句：c = C (); 调用 C 的默认构造函数C constructor
 
+### 3、union  还有大端小端的问题
+利用 union 来看是否是大小端
+union T
+{
+	char s[2];
+    int a;
+};
+
+int main()
+{
+	T t;
+    (1)
+	打印 t.s[0]  t.s[1] t.a 的地址得知
+    &t.s[0] = &（t.a）
+    结论：char数组的0位地址是int的地址向左对齐
+    (2)
+      t.a=0;
+      t.s[0]=10;
+      t.s[1]=1;
+      printf( "%d\n" ,t.a);
+      
+      **（1）定义分析：**
+      大端 高位存在低地址 例如：
+      int 4字节  byte[0] byte[1] byte[2] byte[3] 
+      假设这个 int的16进制是 0x12 34 56 78
+      地址递增 int 0x12 34 56 78 
+      那么 低地址byte[0]存整数的最高位0x12 byte[1]=0x34 byte[2]=0x56 byte[3]=0x78
+      
+      **（2）输出分析：**
+      输出是266，所以这个 int a 的16进制：0x00 00 01 0A 
+      0A是整数低位，t.s[0]是低地址 高位存在高地址
+      
+      【注】：修正原来的文章  我当时实验的电脑是小端  高位存在高地址
+      
+      
+      
+}
 
 
 
