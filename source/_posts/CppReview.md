@@ -7,6 +7,8 @@ published: true
 
 # 复习C++ 
 
+回顾复习下C++的一些知识~
+<!-- more -->
 ### 1、虚函数实现机制
 Class A(){
 	virtual void Ax(){};
