@@ -1,6 +1,6 @@
 ---
 title: CppReview
-date: 2017-08-10T00:00:00.000Z
+date: {}
 tags: null
 published: true
 ---
@@ -129,5 +129,35 @@ int main()
 }
 
 
+### 4、verctor 的内存分配：
+回顾下自己大学的博客 久不用就容易忘记 还是需要不断的学习
+http://blog.csdn.net/linyanhou/article/details/40067727
+1. 不断 push vectro 内存分配 capacity
+for( int i=0;i<200;i++){
+    v.push_back(a1);
+}
+不断 push 然后查看 capacity:
+1 
+2
+3
+4
+6
+9
+13
+源码：
+if (_Capacity < size() + _Count)//当前空间不足，需要扩容  
+            {   // not enough room, reallocate  
+            _Capacity = max_size() - _Capacity / 2 < _Capacity  
+                ? 0 : _Capacity + _Capacity / 2;    // try to grow by 50%，扩容50%  
+            if (_Capacity < size() + _Count)//扩容50%后依然不够容下，则使容量等于当前数据个数加上新增数据个数
+   
+2. 构造函数的调用过程：
+详细看我之前写的博客：
+http://blog.csdn.net/linyanhou/article/details/40067727
+   
+3. 如何使用提高性能：
+为了比较，我们用了三种方式来把100个数据存入vector中，分别是：1、直接每次push_back();2、使用resize()提前分配100个空间，然后push_back;3、使用reserve提前分配100个存储空间。
 
+速度（快到慢）：3>2>1
 
+【注】：reserve分配空间  resize()会调用构造函数
