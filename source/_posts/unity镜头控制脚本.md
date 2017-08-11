@@ -3,6 +3,7 @@ title: unity镜头控制脚本
 date: 2017-08-10T00:00:00.000Z
 tags: null
 published: true
+reward: true
 ---
 学习shader的时候 想在运行时去从各个角度查看模型，所以参考网上已有代码 加上一个手型工具 就得到这份镜头控制脚本
 
