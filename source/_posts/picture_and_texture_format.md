@@ -1,0 +1,272 @@
+# 图片文件格式、纹理格式
+
+@(天天炫斗成长计划)
+
+[toc]
+
+> 我们看到png、jpg、bmp然后又看到RGBA-4444、RGBA-5551、RGB-888，然后看到什么pvr、pkm、etc等等 这些名字很多很多，看到会有些熟悉但是又分不清楚，**本文就来梳理一下这些名字，作简要的解释。**
+
+### 一、首先我们来分类一下
+#### 1、文件格式：图片在硬盘中的格式
+#### 2、纹理格式：这里我认为是：包括了 在内存里面的格式和在传给GPU的纹理。
+#### 3、压缩算法：etc（本文会详细解释此算法）、pvr等 
+
+
+### 二、稍微深入的讲解
+#### 1、文件格式：
+- 我们说的png、jpg、bmp指的是文件格式，就是图片在硬盘里面存储的格式，或者是手机的存储里面的格式，游戏的资源的格式。
+- 引用百度百科里面的话：图像格式即图像文件存放的格式，通常有JPEG、TIFF、RAW、BMP、GIF、PNG。
+**PNG：提取[《PNG文件格式详解》](http://blog.csdn.net/bisword/article/details/2777121)这篇文章的解释：**
+png文件由PNG文件标志（文件头）、3个以上的PNG的数据块（Chunk）按照特定的顺序组成
+
+| PNG文件标志|     Chunk|   ...|  Chunk|
+| :-------- | :--------| :------ |:------ |
+
+下面这个表格是数据块chunk的内容（主要的chunk）
+
+| 数据块符号|     数据块名称|   多数据块|位置限制|
+| :-------- | :--------| :------ |:------ |
+| IHDR	|   文件头数据块|  否|第一块
+|PLTE| 调色板数据块 |	否|	在IDAT之前|
+|IDAT| 图像数据块 |	是|	与其他IDAT连续|
+|IEND| 图像结束数据 |	否|	最后一个数据块|
+
+
+#### 2、纹理格式
+
+| 纹理格式      |     解释|   其他|
+| :-------- | :--------| :------ |
+|RGBA8888 | RGBA 各占8位bit， 一个像素就4byte  |（1）常用地方：整个场景背景图片 大量的渐变色图片 （2）OpenGL ES生成纹理在生成纹理时大小会自动扩展成2的幂次方。不足自动向下调整 |
+|BGRA8888 | 跟RGBA8888顺序不一样  |  |
+|RGBA4444| RGBA 各占4位bit 一个像素就2byte  |  |
+|RGB888|这个相比第一种 RGBA8888 没有 alpha通道 用在没有透明度的图片 游戏背景图片。|  |
+|RGB565|这个是高品质的16位纹理  也是没有透明度|  |
+|RGBA5551|透明度只有0 和 1 没有渐变的图片|  |
+|PVRTC2 | iphone 的图片芯片 对一种称为 PVRTC 的压缩技术提供硬件支持所有颜色和透明度占2个字节(品质可能有点低)  |  |
+|PVRTC4|所有颜色和透明度占4个字节,在ios上基本都用这个格式|(iOS产品专用)|
+|PVRTC2_NOALPHA|RGB占用2个字节，没用ALPHA通道||
+|PVRTC4_NOALPHA|RGB占用4个字节，没用ALPHA通道||
+|ETC1|安卓常用的压缩格式||
+|ETC2|安卓常用的压缩格式||
+
+#### 3、压缩算法
+##### Android设备
+1. 首先，android设备一般使用ETC1压缩  一种有损的图像压缩方式：
+ETC1是opengl2.0 压缩之后每个像素占用4bit  压缩之后的格式为KTX或者PKM  前者支持存储多纹理 后者只支持单纹理 
+1024的RGBA32占用内存4M 如果是etc1的压缩之后就是0.5M
+ETC1的缺点是不支持Alpha通道 不支持有透明度的图片压缩
+2. ETC2解决了Alpha通道 但是它是Opengl3.0标准  考虑到2.0设备市场占用率  一般使用ETC1
+【附】止于 2017 年 8 月 8 日在[安卓开发者中心](https://developer.android.com/about/dashboards/index.html)看到
+| OpenGL ES Version|     Distribution| 
+| :-------- | --------:| 
+| 2.0	| 37.6%| 
+| 3.0	| 45.6%| 
+| 3.1| 	16.8%| 
+
+3. 算法过程解释
+>[ETC压缩算法](https://www.khronos.org/registry/OpenGL/extensions/OES/OES_compressed_ETC1_RGB8_texture.txt)翻译：
+>读这篇文章可以了解 用中文尽可能表达一遍
+>**1.总体了解下：**ETC的压缩单元是4x4的像素块，会把一个4x4的像素块压缩成一个64bit中。
+>
+>**2.下面介绍几张表：**  encode decode过程会使用到的
+> 
+>**1）像素表（源表）**下图就是这个4x4的像素块的表 每个pixel如果用RGBA8888表示 那就是4x4x4 64字节  
+>| pixel| pixel| pixel| pixel|
+>|  :-------- | :-------- |
+>| a  |e |i| m|
+>| b  |f |j| n|
+>| c  |g |k| o|
+>| d  |h |l| p|
+>**2）压缩后表（结果表）** 下图就是压缩后的64bit 每个bit要么是0 要么是1：
+>| bit| bit| bit| bit| bit| bit| bit| bit| bit| bit| bit| bit| bit| bit| bit| bit|
+>|  :-------- | :-------- |
+>|63|62|61|60|59|58|57|56|55|54|53|52|51|50|49|48|
+>| 0| 0| 0| 0| 0| 0| 0| 0| 0| 0| 0| 0| 0| 0| 0| 0|
+>|47|46|45|44|43|42|41|40|39|38|37|36|35|34|33|32|
+>|  0| 0| 0| 0| 0| 0| 0| 0| table cw 1| table cw 1| table cw 1| table cw 2| table cw 2| table cw 2| diff bit| flip bit|
+>|31|30|29|28|27|26|25|24|23|22|21|20|19|18|17|16|
+>|  0| 0| 0| 0| 0| 0| 0| 0| 0| 0| 0| 0| 0| 0| 0| 0|
+>|15|14|13|12|11|10|9|8|7|6|5|4|3|2|1|0|
+>|  0| 0| 0| 0| 0| 0| 0| 0| 0| 0| 0| 0| 0| 0| 0| 0|
+>
+>**3）下面这些表示预存储的表 就是不占文件大小 decode encode过程 调用算法使用的表**
+>3.1）像素差值表 待会会来这里索引取值
+>![Alt text](./1504488376717.png)
+>3.2）间隔表 待会也会来这里索引取值
+>![Alt text](./1504488394913.png)
+> 
+>**3.下面正式介绍算法过程：**   encode过程
+>①**第32bit是flipbit**
+>**如果这个bit是0**  那么这个块分成2个2x4的块 如下： 每个块称为subblock（64bit这里用了1个剩下63个）
+>![Alt text](./1504488756715.png)
+>**如果这个bit是1** 那么这个块分成2个4x2的块 如下： 每个块称为subblock（64bit这里用了1个剩下63个）
+>![Alt text](./1504488781878.png)
+>②**分块之后计算这两个块的颜色均值**，存储颜色均值的方法有两种，用第33bit（diffbit）来表示用了哪种存储颜色均值的方法，每个subblock用12bits存储颜色均值 两个block就是24bits （均值用了24bits 用一个bit表示用了哪个存储颜色均值的方法 所以用了25bit 现在剩下38bits）
+>**如果第33bit（diffbit）是0 那么颜色均值方法如下：**
+>下图是用63到40（一共24bits）来存均值，图中标注了 63-60是给R1 55-52是给G1 47-44是给B1
+>举例子,如果 R1 = 14 =1110b, G1 = 3 = 0011b and B1 = 8 = 1000b, 那么subblock的均值的红色部分是11101110b = 238 绿色部分 00110011b = 51 蓝色部分10001000b = 136. 
+>![Alt text](./1504489517922.png)
+>**如果第33bit（diffbit）是1 那么颜色均值方法如下：**
+>下图是用63到40（一共24bits）来存颜色均值，图中标注了 63-59是给R1 55-51是给G1 47-43是给B1
+>举个例子，如果 R1' = 28 = 11100b,  那么subblock的均值的红色部分是11100111b = 231. 同理绿色部分G1' = 4 = 00100b 蓝色部分B1' = 3 = 00011b, 结果是 00100001b = 33 and 00011000b = 24
+>**这里有点特殊的是第二个块** R、G、B分别只有3bits，也是举例子：如果 R1' = 28 = 11100b   R2 = 100b = -4, 那么28+(-4)=24 = 11000b, 所以第二个块的R是 11000110b = 198. 同理可得G2 B2
+>![Alt text](./1504491196164.png)
+>③**我们先看到![Alt text](./1504492132538.png)39 38 37 bit** 三个bit用于确定是用哪个像素差值表 看到2.3.1的表 有8行 刚好3个bit可以确定是哪行 如果39 38 37 bit是010 那个是2 也就是用-29 -9 9 29这行 同理36 35 34 bit
+>然后现在还有32个bit没有解释，剩下的是第31到第0bit， 我们最原始的像素是16个像素 现在每个像素只有2bit了 我们看这个表可以查询一个映射关系
+>**下面的表** 例如像素d 对应的是19bit和3bit  **举个例子** 19bit是1 3bit是0 那么合起来就是01 我们看到间隔表（2.3.2的表）
+>
+>![Alt text](./1504492579311.png)
+>
+>对应的是b  刚刚我们的像素差值行是[-29 -9 9 29] 所以**得到的值是29** 假设我们的均值颜色是**(231, 8, 16)**那个对应的颜色就是**(231+29, 8+29, 16+29)** 如果越界255 则归为255 所以是**(255, 37, 45)**
+>
+>![Alt text](./1504492407923.png)
+>
+>**上面的过程归结到流程图中**
+>```flow
+>st=>start: Start
+>e=>end
+>op1=>operation:  ①4x4的像素块是分成2个2x4的
+>还是2个4x2的 横切还是竖切？
+>op2=>operation: ②存储颜色均值是用哪种方法？
+>op3=>operation: ③使用table codeword哪个表？
+>op4=>operation: ③16个像素点的像素值跟均值的差值是多少？查表填相应数值
+>st->op1->op2->op3->op4->e
+>
+>```
+	
+
+##### Ios设备
+ios设备中采用的图像格式一般是pvr  也是有损的图像压缩方式 
+pvr压缩分成 pvrtc2 pvrtc4一个是2bits 一个是4bits
+除了压缩内存的优势还可以直接被显卡读取 载入速度更快  缺点是需要PowerVR芯片支持  目前ios设备都能完美支持 
+>[pvr的格式](http://cdn.imgtec.com/sdk-documentation/PVR+File+Format.Specification.Legacy.pdf) [算法原理](http://web.onetel.net.uk/~simonnihal/assorted3d/fenney03texcomp.pdf)
+>pvr文件分成两部分
+>| Header|     Texture Data|
+>| :-------- | --------:|
+>| 44 (pvr1) or 52 bytes(pvr2)|  大于等于0bytes |
+>算法原理比较高深 看不懂 也没有细看
+>文章中的这副图 可以看到 跟ETC有点像 也是把4x4的pixel压缩到64bits里面 16bit是Base ColourB 
+>15bit是Base ColourB 还有个Mod Mode存一个bit 剩下的32bits是 Modulation Data每2bits对应一个像素点 对应关系如下：
+>![Alt text](./1504511314399.png)
+>![Alt text](./1504509740940.png)
+
+#### 4、从上面的1文件格式、2纹理格式、3压缩算法 应用到一些问题上：
+下面图片是一张图片的三个格式 png32 pvr pkm 
+![Alt text](./1504516848865.png)
+![Alt text](./1504516795002.png)
+
+1. 第一个问题，理论上png32 512x512 大小应该是512x512x4bytes（1M） 但是这里显示217km?
+这个是因为png32文件也有自己的压缩，这张png32在内存里面用的是1M  但是文件格式有自己的无损压缩方法 所以小于1M
+2. pvr的是一个像素4bits  所以应该是 512x512x0.5bytes=128km  这里是129kb
+因为pvr分为 Header和Texture Data 多出的1k byte存头部
+ 
+
+
+
+
+### 二、炫斗图片格式
+#### 根据图片用途分类选择图片格式
+**角色：**picc格式 （picc是炫斗自己的图片格式）调色板格式
+**spine：**安卓平台用 pkm（etc1格式，etc2 要opengles3.0才支持，所以一般都用ETC1）ios平台使用RGBAPVRTC4(带alpha通道的4bit pvr压缩格式)
+**UI ：**png8(调色板格式)
+**UI特效 ：**高端机用无损的png32 低端机用etc1、pvr
+**其他特效**： etc1、pvr
+
+
+#### 1.pkm
+**文件格式：**在炫斗中，pkm文件存储为两部分 PKM和RAW(alpha通道在这里存储)
+
+- PKM部分：
+文件头存储的前8bytes存一个字符串是"RAW" 
+“RAW”之后就是etc文件 解析etc头部会有大小信息 这个头部是16字节（etc1） 12-14 width 14-16 height
+ 然后读取内容
+
+- RAW部分
+文件头存储的前4bytes 是"RAW" 5-6字节是宽w 7-8字节是高h
+先读取前8字节就知道alpha通道的大小是w*h  也就是要读取出来的长度
+
+**内存中：**存储在两个地方 一个是alpha值 一个是RGB（etc自己的格式）
+
+**渲染时：**在渲染的时候合并alpha通道
+
+	vec4 pixColor =  texture2D(texture0, texcoord0); 
+    pixColor.a  =   texture2D(texture1, texcoord0).r; 
+    gl_FragColor = pixColor;
+
+#### 2.pvr
+**文件格式：**在炫斗中，pvr文件格式是pvr
+**内存中：**是PF_RGBAPVRTC4
+**渲染时：** ios设备CPU支持pve
+
+#### 3.pvr和pkm在构建的时候会区分平台去构建 
+- pvr：unity可以用cacheserver 炫斗则用一个文件记录MD5  把pvr提交到svn中
+- etc：炫斗中对ETC没有做cache每次构建都会花费6-7分钟转换etc
+
+
+
+
+------------
+参考引用：
+pvr和png内存占用
+http://blog.csdn.net/kaitiren/article/details/8054856
+http://www.cnblogs.com/xulidong/p/5681351.html
+
+纹理格式
+http://blog.csdn.net/ynnmnm/article/details/44983545
+
+
+附：
+安卓设备市场份额的分布（谷歌统计）
+https://developer.android.com/about/dashboards/index.html
+
+
+
+
+
+-------
+后续学习
+1. pvr可以做压缩 ccz压缩  
+2. jpg的消耗
+炫斗：
+安卓：ETC1
+IOS：PVR 和 PNG 看下支持不
+
+
+【1】pvr改成全占用 问段爷 可以全支持吗  iphone5
+【2】png8内存占用  
+【3】NP2DSRenderStep::RenderNAPack	( void )   传送纹理的地方
+NP2DSRenderUtil.cppNP2DSRenderStep.cpp渲染shader
+NPPixelFormat 纹理格式
+
+	vec4 pixColor =  texture2D(texture0, texcoord0); 
+    pixColor.a  =   texture2D(texture1, texcoord0).r; 
+    gl_FragColor = pixColor;
+
+纹理读取像素
+渲染调用堆栈
+RenderBack();
+NPGUIControl::DrawFrame	
+NP2DSRenderUtil::DrawFrame
+NP2DSImageRef::SubRender
+NP2DSRenderUtil::DrawImage	
+NPTexturePalette::GetTexture这个函数cache
+NPTexturePalette::ResTexture 没有生成过就去生成
+NPSourceTexture::CreateV2
+这里面
+NPTexture::RegisterTextureCreateFun(CTBxTexture::RequestCreate);
+然后 UI 用NPTexture::CreateTextureInner
+
+工厂类才是真正用到的函数：NPSourceTexture::CreateV2
+
+下面都是NPSourceTexture的构造函数调用 来处理纹理
+NPSourceTexture::LoadPixelData 存到成员变量里面mSourceData
+
+这个函数在生成的时候调用 NPSourceTexture::CreateGLTexture这个像是生成GL纹理
+这个函数判断是否是调色板 还是etc的alpah 设置到 NPSourceTexture（alpha） NPCommonTexture（调色板）
+存到mSlavedTexture里面
+
+
+NPImageLoader::ReadImageFile是基类
+NPImageReaderETC是读取类子类
+
+NPPixelBuffer存储文件里面的 这个类有个mExtraPixBuffer存储额外的纹理（etc存alpha通道）
