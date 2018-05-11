@@ -71,7 +71,7 @@ theme: yilia
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repository: https://github.com/wlxklyh/wlxklyh.github.io  #部署的仓库的SSH
+  repository: https://github.com/wlxklyh/wlxklyh.github.com  #部署的仓库的SSH
   branch: master   #部署分支,一般使用master主分支
 
 auto_excerpt:
