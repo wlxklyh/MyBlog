@@ -148,6 +148,141 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-unityAdsAdapter/广告图适配方案" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="广告图适配方案"><a href="#广告图适配方案" class="headerlink" title="广告图适配方案"></a>广告图适配方案</h1><p>@(Gwgo学习笔记)</p>
+<p>[toc]</p>
+<h2 id="一、效果方案"><a href="#一、效果方案" class="headerlink" title="一、效果方案"></a>一、效果方案</h2><h4 id="0、适配方案就是让美术出一张图-然后在各个机型都不会变形，但是会被拆切了一部分。因为会有裁剪所以需要让美术知道哪部分是可能会被裁剪掉的。"><a href="#0、适配方案就是让美术出一张图-然后在各个机型都不会变形，但是会被拆切了一部分。因为会有裁剪所以需要让美术知道哪部分是可能会被裁剪掉的。" class="headerlink" title="0、适配方案就是让美术出一张图 然后在各个机型都不会变形，但是会被拆切了一部分。因为会有裁剪所以需要让美术知道哪部分是可能会被裁剪掉的。"></a>0、适配方案就是让美术出一张图 然后在各个机型都不会变形，但是会被拆切了一部分。因为会有裁剪所以需要让美术知道哪部分是可能会被裁剪掉的。</h4><h4 id="1、适配机型的依据："><a href="#1、适配机型的依据：" class="headerlink" title="1、适配机型的依据："></a>1、适配机型的依据：</h4><p><img src="/2018/05/11/unityAdsAdapter/广告图适配方案/1525588861883.png" alt="Alt text"><br><a href="http://nb.oa.com/AdaptionData/index/" target="_blank" rel="external">http://nb.oa.com/AdaptionData/index/</a></p>
+<h4 id="2、适配方案如下："><a href="#2、适配方案如下：" class="headerlink" title="2、适配方案如下："></a>2、适配方案如下：</h4><p>出图是出iphonex的图，全屏图是473*1024<br><img src="/2018/05/11/unityAdsAdapter/广告图适配方案/1525595273245.png" alt="Alt text"></p>
+<h4 id="3、全屏图的换算公式："><a href="#3、全屏图的换算公式：" class="headerlink" title="3、全屏图的换算公式："></a>3、全屏图的换算公式：</h4><p> （1）如果我们考虑最长的屏幕是iphonex  确定好以这个来出图  其他的手机屏幕去适配这个的是会只会可能被拆检上下的区域<br><img src="/2018/05/11/unityAdsAdapter/广告图适配方案/1525598195085.png" alt="Alt text"></p>
+<p>（2）把2436<em>1125 等比例缩放成 1024</em>473（有0.1的细微拉升 基本无感知）</p>
+<p>（3）把其他屏幕换算,<br>等比拉升：deviceH/deviceW = deviceHScale/473<br>所以deviceHScale = 设备高宽比*473<br><img src="/2018/05/11/unityAdsAdapter/广告图适配方案/1525598487988.png" alt="Alt text"></p>
+<p>（4）算出上限 下限<br><img src="/2018/05/11/unityAdsAdapter/广告图适配方案/1525598533911.png" alt="Alt text"></p>
+<p>（5）选线，告诉美术这些线的意义：</p>
+<ol>
+<li>iphonex就是出图的结果 第一条线就是iphone6也是大部分安卓机的比例</li>
+<li>第二条是需要适配的安卓机的<strong>最小比例</strong></li>
+<li>第三条线就是iphone4的比例</li>
+</ol>
+<p>总结，美术要考虑第一条线（iphone6）来出图 因为这是大部分机的尺寸，然后去重要内容（文字）要放在第二条线以内，第三条线可以不考虑那么多。<br><img src="/2018/05/11/unityAdsAdapter/广告图适配方案/1525598656780.png" alt="Alt text"></p>
+<h4 id="4、活动图的换算公式："><a href="#4、活动图的换算公式：" class="headerlink" title="4、活动图的换算公式："></a>4、活动图的换算公式：</h4><p>了解个概念：matchWidthOrHeight<br>等于1的时候：缩放宽度<br>等于0的时候：缩放高度<br> 我们只有0、1情况</p>
+<p><img src="/2018/05/11/unityAdsAdapter/广告图适配方案/1525599459607.png" alt="Alt text"><br><img src="/2018/05/11/unityAdsAdapter/广告图适配方案/1525599029998.png" alt="Alt text"></p>
+<p>代码中会动态改变这个值 所以换算公式也需要<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">if (Screen.width / this.m_canvasScaler.referenceResolution.x &gt; Screen.height /             this.m_canvasScaler.referenceResolution.y)</div><div class="line">         &#123;</div><div class="line">             this.m_canvasScaler.matchWidthOrHeight = 1.0f;</div><div class="line">         &#125;</div><div class="line">         else</div><div class="line">         &#123;</div><div class="line">             this.m_canvasScaler.matchWidthOrHeight = 0f;</div><div class="line">         &#125;</div></pre></td></tr></table></figure></p>
+<p><img src="/2018/05/11/unityAdsAdapter/广告图适配方案/1525599300970.png" alt="Alt text"></p>
+<p>（1）算出在设备里面的广告图高度<br>（2）类似全屏图计算</p>
+<h2 id="三、转PVR、ETC"><a href="#三、转PVR、ETC" class="headerlink" title="三、转PVR、ETC"></a>三、转PVR、ETC</h2><h4 id="1、目前的比例是按照高度是1024来做的"><a href="#1、目前的比例是按照高度是1024来做的" class="headerlink" title="1、目前的比例是按照高度是1024来做的"></a>1、目前的比例是按照高度是1024来做的</h4><p>后续如果为了省内存或者是省流量<br>pvr就可以做成这样，左边是原图右边是Alpha通道<br>pvr右侧取得是r g b其中一个值</p>
+<p>除了广告图可以左右拆分alpha 其他图集也是可以这样做的。<br><img src="/2018/05/11/unityAdsAdapter/广告图适配方案/1525597015723.png" alt="Alt text"></p>
+<h4 id="2、需要这些工作"><a href="#2、需要这些工作" class="headerlink" title="2、需要这些工作"></a>2、需要这些工作</h4><p>（1）代码中是把www.bytes转RGBA32  存储宽高信息<br>需要知道 原来的宽高  全屏则是473*1024<br>（2）分平台下载 etc pvr<br>（3）修改材质  shader 需要修改uv<br>（4）给美术使用的转图工具<br>（5）给策划使用的上传工具</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/11/unityAdsAdapter/广告图适配方案/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-unityAdsAdapter" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/11/unityAdsAdapter/">unityAdsAdapter</a>
+    </h1>
+  
+
+        
+        <a href="/2018/05/11/unityAdsAdapter/" class="archive-article-date">
+  	<time datetime="2018-05-11T12:07:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、效果方案"><a href="#一、效果方案" class="headerlink" title="一、效果方案"></a>一、效果方案</h2><h4 id="0、适配方案就是让美术出一张图-然后在各个机型都不会变形，但是会被拆切了一部分。因为会有裁剪所以需要让美术知道哪部分是可能会被裁剪掉的。"><a href="#0、适配方案就是让美术出一张图-然后在各个机型都不会变形，但是会被拆切了一部分。因为会有裁剪所以需要让美术知道哪部分是可能会被裁剪掉的。" class="headerlink" title="0、适配方案就是让美术出一张图 然后在各个机型都不会变形，但是会被拆切了一部分。因为会有裁剪所以需要让美术知道哪部分是可能会被裁剪掉的。"></a>0、适配方案就是让美术出一张图 然后在各个机型都不会变形，但是会被拆切了一部分。因为会有裁剪所以需要让美术知道哪部分是可能会被裁剪掉的。</h4>
+        
+          <a class="article-more-a" href="/2018/05/11/unityAdsAdapter/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/11/unityAdsAdapter/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-CppReview" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
