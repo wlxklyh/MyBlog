@@ -6,18 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>CppReview | hawk的博客</title>
+  <title>Archives: 2018 | hawk的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="复习C++回顾复习下C++的一些知识~重新看下大学时候自己写的博客，做了些实验来验证C++的知识点：http://blog.csdn.net/linyanhou/article/details/40153521">
-<meta property="og:type" content="article">
-<meta property="og:title" content="CppReview">
-<meta property="og:url" content="http://yoursite.com/2017/09/10/CppReview/index.html">
+  <meta name="description" content="华工11级计联 毕业就职腾讯游戏。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="hawk的博客">
+<meta property="og:url" content="http://yoursite.com/archives/2018/index.html">
 <meta property="og:site_name" content="hawk的博客">
-<meta property="og:description" content="复习C++回顾复习下C++的一些知识~重新看下大学时候自己写的博客，做了些实验来验证C++的知识点：http://blog.csdn.net/linyanhou/article/details/40153521">
-<meta property="og:updated_time" content="2017-09-10T13:55:59.000Z">
+<meta property="og:description" content="华工11级计联 毕业就职腾讯游戏。">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CppReview">
-<meta name="twitter:description" content="复习C++回顾复习下C++的一些知识~重新看下大学时候自己写的博客，做了些实验来验证C++的知识点：http://blog.csdn.net/linyanhou/article/details/40153521">
+<meta name="twitter:title" content="hawk的博客">
+<meta name="twitter:description" content="华工11级计联 毕业就职腾讯游戏。">
   
     <link rel="alternative" href="/atom.xml" title="hawk的博客" type="application/atom+xml">
   
@@ -147,172 +146,49 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-CppReview" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      CppReview
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2018" class="archive-year">2018</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2018/05/11/CppReview/" class="archive-article-date">
+  	<time datetime="2018-05-11T10:13:52.205Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-11</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2018/05/11/CppReview/">CppReview</a>
     </h1>
   
 
-        
-        <a href="/2017/09/10/CppReview/" class="archive-article-date">
-  	<time datetime="2017-09-10T13:55:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="复习C"><a href="#复习C" class="headerlink" title="复习C++"></a>复习C++</h1><p>回顾复习下C++的一些知识~<br>重新看下大学时候自己写的博客，做了些实验来验证C++的知识点：<a href="http://blog.csdn.net/linyanhou/article/details/40153521" target="_blank" rel="external">http://blog.csdn.net/linyanhou/article/details/40153521</a></p>
-<a id="more"></a>
-<h3 id="1、虚函数实现机制"><a href="#1、虚函数实现机制" class="headerlink" title="1、虚函数实现机制"></a>1、虚函数实现机制</h3><p>Class A(){<br>    virtual void Ax(){};<br>    virtual void Ay(){};<br>};<br>Class D:A{<br>    virtual void Ax(){};<br>    virtual void Ax1(){};<br>    virtual void Ay1(){};<br>};</p>
-<p>A a;<br>D d;</p>
-<p>a对象包含一个虚函数表的指针<br>vptrA:存了Ax、Ay函数的函数地址<br>d对象包含一个虚函数表的指针<br>vptrD:存了Ax、Ay、Ax1、Ay1函数的函数地址<br>Ax是指的是继承类里面的 Ax</p>
-<p>多重集成 A、B（两个都包含虚函数的类） 那么则会有两个虚表 </p>
-<p>用下面代码看下虚表存在哪里：<br>class A<br>{<br>public :<br>       virtual void test(){};<br>};<br>int main()<br>{<br>       A a1;<br>       A a2;<br>      cout&lt;&lt;&amp;a1&lt;&lt;endl;<br>      cout&lt;&lt; sizeof (a1)&lt;&lt;endl;<br>      cout&lt;&lt;&amp;a2&lt;&lt;endl;<br>      cout&lt;&lt; sizeof (a2)&lt;&lt;endl;<br>}</p>
-<p>输出结果跟 &amp;a1 a1._vfptr 比较发现是一样的，sizeof(a1)是4字节</p>
-<p>见大学写的博客：<a href="http://blog.csdn.net/linyanhou/article/details/40153521" target="_blank" rel="external">http://blog.csdn.net/linyanhou/article/details/40153521</a></p>
-<h3 id="2、构造函数调用顺序"><a href="#2、构造函数调用顺序" class="headerlink" title="2、构造函数调用顺序"></a>2、构造函数调用顺序</h3><p>基类构造函数  之后成员对象的构造函数 之后派生类的构造函数<br>下面实验是说明成员对象在初始化列表初始化的话是先于本身的构造函数的：<br>class C<br>{<br>public :<br>      C()<br>      {<br>            printf( “C constructor\n” );<br>      }<br>      C( int i)<br>      {<br>            printf( “have num %d constructor\n” ,i );<br>      }<br>};<br>class A<br>{<br>public :<br>       C c;<br>      A():c(123){printf( “A constructor\n” );c = C ();};<br>       virtual void foo(){<br>            printf( “Base Class Constructor.” );<br>      }<br>};<br>int main()<br>{<br>       A a;<br>}<br>输出是：<br>第一先是这句：A():c(123) 调用了 C 的参数构造函数 输出have num 123 constructor<br>第二是这句：printf( “A constructor\n” );  输出A constructor<br>第三句是这句：c = C (); 调用 C 的默认构造函数C constructor</p>
-<h3 id="3、union-还有大端小端的问题"><a href="#3、union-还有大端小端的问题" class="headerlink" title="3、union  还有大端小端的问题"></a>3、union  还有大端小端的问题</h3><p>利用 union 来看是否是大小端<br>union T<br>{<br>    char s[2];<br>    int a;<br>};</p>
-<p>int main()<br>{<br>    T t;<br>    (1)<br>    打印 t.s[0]  t.s[1] t.a 的地址得知<br>    &amp;t.s[0] = &amp;（t.a）<br>    结论：char数组的0位地址是int的地址向左对齐<br>    (2)<br>      t.a=0;<br>      t.s[0]=10;<br>      t.s[1]=1;<br>      printf( “%d\n” ,t.a);</p>
-<pre><code>**（1）定义分析：**
-大端 高位存在低地址 例如：
-int 4字节  byte[0] byte[1] byte[2] byte[3] 
-假设这个 int的16进制是 0x12 34 56 78
-地址递增 int 0x12 34 56 78 
-那么 低地址byte[0]存整数的最高位0x12 byte[1]=0x34 byte[2]=0x56 byte[3]=0x78
+        <div class="article-info info-on-right">
+          
+          
 
-**（2）输出分析：**
-输出是266，所以这个 int a 的16进制：0x00 00 01 0A 
-0A是整数低位，t.s[0]是低地址 高位存在高地址
-
-【注】：修正原来的文章  我当时实验的电脑是小端  高位存在高地址
-</code></pre><p>}</p>
-<h3 id="4、verctor-的内存分配："><a href="#4、verctor-的内存分配：" class="headerlink" title="4、verctor 的内存分配："></a>4、verctor 的内存分配：</h3><p>回顾下自己大学的博客 久不用就容易忘记 还是需要不断的学习<br><a href="http://blog.csdn.net/linyanhou/article/details/40067727" target="_blank" rel="external">http://blog.csdn.net/linyanhou/article/details/40067727</a></p>
-<ol>
-<li><p>不断 push vectro 内存分配 capacity<br>for( int i=0;i&lt;200;i++){<br> v.push_back(a1);<br>}<br>不断 push 然后查看 capacity:<br>1<br>2<br>3<br>4<br>6<br>9<br>13<br>源码：<br>if (_Capacity &lt; size() + _Count)//当前空间不足，需要扩容  </p>
-<pre><code>{   // not enough room, reallocate  
-_Capacity = max_size() - _Capacity / 2 &lt; _Capacity  
-    ? 0 : _Capacity + _Capacity / 2;    // try to grow by 50%，扩容50%  
-if (_Capacity &lt; size() + _Count)//扩容50%后依然不够容下，则使容量等于当前数据个数加上新增数据个数
-</code></pre></li>
-<li><p>构造函数的调用过程：<br>详细看我之前写的博客：<br><a href="http://blog.csdn.net/linyanhou/article/details/40067727" target="_blank" rel="external">http://blog.csdn.net/linyanhou/article/details/40067727</a></p>
-</li>
-<li><p>如何使用提高性能：<br>为了比较，我们用了三种方式来把100个数据存入vector中，分别是：1、直接每次push_back();2、使用resize()提前分配100个空间，然后push_back;3、使用reserve提前分配100个存储空间。</p>
-</li>
-</ol>
-<p>速度（快到慢）：3&gt;2&gt;1</p>
-<p>【注】：reserve分配空间  resize()会调用构造函数</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/09/10/CppReview/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
   
   
-    <a href="/2017/09/10/picture-texture/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">手游中的文件格式和纹理格式</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
+    
 
 
           </div>
@@ -335,8 +211,8 @@ if (_Capacity &lt; size() + _Count)//扩容50%后依然不够容下，则使容�
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
-		isArchive: false,
+		isPost: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
