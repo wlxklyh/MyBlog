@@ -53,5 +53,3 @@ def main():
 
             shutil.copyfile(MdFilePath, targetMdFilePath)
             shutil.copytree(ImgFilePath,targetImgFilePath)
-
-main()
