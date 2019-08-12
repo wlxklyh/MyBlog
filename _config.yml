@@ -48,7 +48,7 @@ avatar: /img/header.jpg
 # Category & Tag
 default_category: uncategorized
 category_map:
-tag_map:纹理格式-手游开发,unity,随笔
+tag_map:
 
 # Date / Time format
 ## Hexo uses Moment.js to parse and display date
