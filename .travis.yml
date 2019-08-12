@@ -17,7 +17,7 @@ install:
   
 script:
   - pwd
-  - python source\MDPosts\MovePost.py
+  - python source/MDPosts/MovePost.py
   - hexo clean && hexo publish * && hexo g 
 
 after_script:
