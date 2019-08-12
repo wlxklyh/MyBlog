@@ -16,8 +16,10 @@ install:
   - npm install
   
 script:
+  - root_path=`pwd`
+  - ProjectPath=$root_path/source/MDPosts/ 
   - pwd
-  - python 'source/MDPosts/MovePost.py'
+  - python 'source/MDPosts/MovePost.py' 
   - hexo clean && hexo g 
 
 after_script:
