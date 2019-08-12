@@ -1,5 +1,5 @@
 language: node_js
-
+sudo: required
 python:
   - "2.7"
 
