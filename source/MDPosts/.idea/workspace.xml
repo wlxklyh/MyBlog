@@ -13,8 +13,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MovePost.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="475">
-              <caret line="55" selection-start-line="55" selection-end-line="55" />
+            <state relative-caret-position="380">
+              <caret line="23" column="4" selection-start-line="23" selection-start-column="4" selection-end-line="23" selection-end-column="4" />
               <folding>
                 <element signature="e#24#39#0" expanded="true" />
               </folding>
@@ -35,7 +35,7 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="494" />
+    <option name="x" value="699" />
     <option name="y" value="304" />
     <option name="width" value="1934" />
     <option name="height" value="1066" />
@@ -118,15 +118,15 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1565587653815</updated>
-      <workItem from="1565587654970" duration="4197000" />
+      <workItem from="1565587654970" duration="4442000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4197000" />
+    <option name="totallyTimeSpent" value="4442000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="494" y="304" width="1934" height="1066" extended-state="0" />
+    <frame x="699" y="304" width="1934" height="1066" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
@@ -171,8 +171,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MovePost.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="475">
-          <caret line="55" selection-start-line="55" selection-end-line="55" />
+        <state relative-caret-position="380">
+          <caret line="23" column="4" selection-start-line="23" selection-start-column="4" selection-end-line="23" selection-end-column="4" />
           <folding>
             <element signature="e#24#39#0" expanded="true" />
           </folding>

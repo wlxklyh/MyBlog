@@ -21,7 +21,7 @@ def main():
     MdPostPath = os.path.join(SourcePostPath, "MDPosts");
     _postsPath = os.path.join(SourcePostPath, "_posts");
 
-
+    
 
     listDirs = os.walk(MdPostPath)
     for root, dirs, files in listDirs:
