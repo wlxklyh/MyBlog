@@ -14,6 +14,7 @@ before_install:
   
 install:
   - npm install
+  - npm i hexo-generator-json-content --save
   
 script:
   - root_path=`pwd`
