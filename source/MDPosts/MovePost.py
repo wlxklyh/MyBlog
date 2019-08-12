@@ -15,17 +15,19 @@ def main():
     print os.path.abspath(os.curdir)
 
     SourcePostPath = os.path.join(os.curdir,"source");
-
     MdPostPath = os.path.join(SourcePostPath,"MDPosts");
     _postsPath = os.path.join(SourcePostPath, "_posts");
 
+    print("SourcePostPath:" + SourcePostPath)
+    print("MdPostPath:" + MdPostPath)
+    print("_postsPath:" + _postsPath)
 
 
     listDirs = os.walk(MdPostPath)
     for root, dirs, files in listDirs:
         for folderPath in dirs:
             folderAbsPath = os.path.join(root, folderPath)
-
+            print(folderAbsPath )
             if ".idea" == folderPath:
                 continue
             if "Img" == folderPath:
@@ -38,10 +40,10 @@ def main():
             targetMdFilePath = os.path.join(_postsPath, folderPath+".md");
             targetImgFilePath = os.path.join(_postsPath, folderPath);
 
-            # logging.info("MdFilePath:"+MdFilePath)
-            # logging.info("ImgFilePath:"+ImgFilePath)
-            # logging.info("targetMdFilePath:"+targetMdFilePath)
-            # logging.info("targetImgFilePath:"+targetImgFilePath)
+            # print("MdFilePath:"+MdFilePath)
+            # print("ImgFilePath:"+ImgFilePath)
+            # print("targetMdFilePath:"+targetMdFilePath)
+            # print("targetImgFilePath:"+targetImgFilePath)
 
             if  os.path.exists(targetImgFilePath):
                 shutil.rmtree(targetImgFilePath)
@@ -50,6 +52,7 @@ def main():
             shutil.copyfile(MdFilePath, targetMdFilePath)
             shutil.copytree(ImgFilePath,targetImgFilePath)
 
+            shutil.rmtree(folderAbsPath)
 
 
 main()
