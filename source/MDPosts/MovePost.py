@@ -12,8 +12,8 @@ logging.basicConfig(filename='log_examp.log',level=logging.DEBUG)
 
 def main():
     print ("print ======[1]MovePost start=====")
-    logging.info("======[1]MovePost start=====\n")
-    os.system("echo '===MovePost start'")
+    print os.path.abspath(os.curdir)
+
     # [0]参数处理===
     parser = argparse.ArgumentParser()
     args, unknown = parser.parse_known_args()
@@ -65,4 +65,5 @@ def main():
     if os.path.exists(MdPostPath):
         shutil.rmtree(MdPostPath)
     pass
-# main()
+
+main()
