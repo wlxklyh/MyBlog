@@ -13,7 +13,7 @@ logging.basicConfig(filename='log_examp.log',level=logging.DEBUG)
 def main():
 
     logging.info("======[1]MovePost start=====\n")
-
+    os.system("echo ===MovePost start")
     # [0]参数处理===
     parser = argparse.ArgumentParser()
     args, unknown = parser.parse_known_args()
