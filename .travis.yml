@@ -13,7 +13,8 @@ install:
   - npm install
   
 script:
-  - hexo clean && hexo g && hexo d
+  - 
+  - hexo clean && hexo g
 
 after_script:
   - cd ./public
