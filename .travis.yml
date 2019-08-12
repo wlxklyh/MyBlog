@@ -19,7 +19,7 @@ script:
   - root_path=`pwd`
   - ProjectPath=$root_path/source/MDPosts/
   - pwd
-  - python 'source/MDPosts/MovePost.py' $ProjectPath
+  - python 'source/MDPosts/MovePost.py' 'source/MDPosts/'
   - hexo clean && hexo g 
 
 after_script:
