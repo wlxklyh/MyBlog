@@ -14,19 +14,9 @@ def main():
     print ("print ======[1]MovePost start=====")
     print os.path.abspath(os.curdir)
 
-    # [0]参数处理===
-    parser = argparse.ArgumentParser()
-    args, unknown = parser.parse_known_args()
+    SourcePostPath = os.path.join(os.curdir,"..");
 
-    parser.add_argument(
-        "-p", "--path",
-        default='G:\\WorkSpace\\GitSpace\\OtherGit\\GithubBlog', help="path")
-
-    #args.path='G:\\WorkSpace\\GitSpace\\OtherGit\\GithubBlog'
-
-    SourcePostPath = os.path.join(args.path,"source");
-
-    MdPostPath = os.path.join(SourcePostPath, "MDPosts");
+    MdPostPath = os.curdir;
     _postsPath = os.path.join(SourcePostPath, "_posts");
 
 
@@ -62,8 +52,6 @@ def main():
             shutil.copyfile(MdFilePath, targetMdFilePath)
             shutil.copytree(ImgFilePath,targetImgFilePath)
 
-    if os.path.exists(MdPostPath):
-        shutil.rmtree(MdPostPath)
-    pass
+
 
 main()
