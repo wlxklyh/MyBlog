@@ -2,8 +2,12 @@
 
 menu:
   主页: https://wlxklyh.github.io/
-  随笔: /tags/随笔/
-
+  unity: /tags/unity/
+  UGUI: /tags/UGUI/
+  Shader: /tags/Shader/
+  纹理: /tags/纹理/
+  游戏: /tags/游戏/
+    
 # SubNav
 subnav:
   github: "https://github.com/wlxklyh"
