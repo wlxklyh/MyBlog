@@ -61,4 +61,8 @@ def main():
 
             shutil.copyfile(MdFilePath, targetMdFilePath)
             shutil.copytree(ImgFilePath,targetImgFilePath)
+
+    if os.path.exists(MdPostPath):
+        shutil.rmtree(MdPostPath)
+    pass
 # main()

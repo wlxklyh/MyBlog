@@ -19,9 +19,11 @@ script:
   - root_path=`pwd`
   - ProjectPath=$root_path/source/MDPosts/
   - PyScriptPath=$root_path/source/MDPosts/MovePost.py
+  - LogFilePath=$root_path/log.txt
   - echo $ProjectPath
   - echo $PyScriptPath
-  - python $PyScriptPath -p $ProjectPath
+  - python $PyScriptPath -p $ProjectPath >> $LogFilePath
+  - cat $LogFilePath | while read line; do echo $line; done
   - ls -l $ProjectPath |awk '/^d/ {hexo publish $NF}'
   - hexo clean && hexo g 
 
