@@ -24,6 +24,7 @@ script:
   - echo $PyScriptPath
   - python $PyScriptPath >> $LogFilePath
   - cat $LogFilePath | while read line; do echo $line; done
+  - ls -l $ProjectPath |awk '/^d/ {echo $NF}'
   - ls -l $ProjectPath |awk '/^d/ {hexo publish $NF}'
   - hexo clean && hexo g 
 
