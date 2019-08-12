@@ -18,8 +18,10 @@ install:
 script:
   - root_path=`pwd`
   - ProjectPath=$root_path/source/MDPosts/
+  - PyScriptPath=$root_path/source/MDPosts/MovePost.py
   - echo $ProjectPath
-  - python 'source/MDPosts/MovePost.py' -p $ProjectPath
+  - echo $PyScriptPath
+  - python PyScriptPath -p $ProjectPath
   - ls -l $ProjectPath |awk '/^d/ {hexo publish $NF}'
   - hexo clean && hexo g 
 
