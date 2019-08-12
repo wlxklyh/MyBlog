@@ -17,7 +17,7 @@ install:
   
 script:
   - root_path=`pwd`
-  - ProjectPath=$root_pathsource/MDPosts/
+  - ProjectPath=$root_path/source/MDPosts/
   - echo $ProjectPath
   - python 'source/MDPosts/MovePost.py' 'source/MDPosts/'
   - hexo clean && hexo g 
