@@ -20,6 +20,7 @@ script:
   - ProjectPath=$root_path/source/MDPosts/
   - echo $ProjectPath
   - python 'source/MDPosts/MovePost.py' -p $ProjectPath
+  - ls -l $ProjectPath |awk '/^d/ {print $NF}'
   - hexo clean && hexo g 
 
 after_script:
