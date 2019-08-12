@@ -14,9 +14,9 @@ def main():
     print ("print ======[1]MovePost start=====")
     print os.path.abspath(os.curdir)
 
-    SourcePostPath = os.path.join(os.curdir,"..");
+    SourcePostPath = os.path.join(os.curdir,"source");
 
-    MdPostPath = os.curdir;
+    MdPostPath = os.path.join(SourcePostPath,"MDPosts");
     _postsPath = os.path.join(SourcePostPath, "_posts");
 
 
@@ -33,9 +33,7 @@ def main():
             MdFilePath = os.path.join(folderAbsPath, folderPath+".md");
             ImgFilePath = os.path.join(folderAbsPath, "Img");
 
-            strCmd = 'hexo publish '+folderPath
-            logging.info("run:"+strCmd+"\n")
-            os.system(strCmd)
+
 
             targetMdFilePath = os.path.join(_postsPath, folderPath+".md");
             targetImgFilePath = os.path.join(_postsPath, folderPath);
