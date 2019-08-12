@@ -11,7 +11,7 @@ logging.basicConfig(filename='log_examp.log',level=logging.DEBUG)
 
 
 def main():
-
+    print ("print ======[1]MovePost start=====")
     logging.info("======[1]MovePost start=====\n")
     os.system("echo '===MovePost start'")
     # [0]参数处理===
