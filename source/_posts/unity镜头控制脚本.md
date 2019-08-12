@@ -14,7 +14,7 @@ using UnityEngine;
 using System.Collections;
 
 public class CameraController : MonoBehaviour {
-//  【使用说明】：参考了网上代码
+//  【使用说明】：参考了网上代码 ~~
 //  1、拖拽到摄像头 作为摄像头的组件
 //  2、运行的时候：
 //      （1）镜头旋转 右键点击着屏幕 然后移动鼠标 即可旋转屏幕
