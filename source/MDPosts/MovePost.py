@@ -16,9 +16,6 @@ def main():
         "-p", "--path",
         default='G:\\WorkSpace\\GitSpace\\OtherGit\\GithubBlog', help="path")
 
-    args.path='G:\\WorkSpace\\GitSpace\\OtherGit\\GithubBlog'
-    print(args.path)
-
     SourcePostPath = os.path.join(args.path,"source");
 
     MdPostPath = os.path.join(SourcePostPath, "MDPosts");
@@ -37,6 +34,10 @@ def main():
                 continue
             MdFilePath = os.path.join(folderAbsPath, folderPath+".md");
             ImgFilePath = os.path.join(folderAbsPath, "Img");
+
+            strCmd = 'hexo publish '+folderPath
+            print("run:"+strCmd)
+            os.system(strCmd)
 
             targetMdFilePath = os.path.join(_postsPath, folderPath+".md");
             targetImgFilePath = os.path.join(_postsPath, folderPath);
