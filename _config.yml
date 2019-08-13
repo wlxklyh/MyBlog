@@ -95,5 +95,5 @@ jsonContent:
       link: false
       permalink: false
       excerpt: false
-      categories: true
+      categories: false
       tags: true
