@@ -10,7 +10,7 @@ before_install:
   - export TZ='Asia/Shenzhen'
   - npm install hexo-cli -g
   - npm install hexo-asset-image --save
-  - npm i hexo-generator-json-content --save
+  - npm install hexo-generator-json-content@1 --save
   - npm rebuild
   
 install:
