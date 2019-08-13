@@ -17,6 +17,7 @@ install:
   - npm i hexo-generator-json-content --save
   
 script:
+  - npm i hexo-generator-json-content --save
   - root_path=`pwd`
   - ProjectPath=$root_path/source/MDPosts/
   - PyScriptPath=$root_path/source/MDPosts/MovePost.py
