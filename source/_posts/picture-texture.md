@@ -1,7 +1,9 @@
 ---
 title: 手游中的文件格式和纹理格式
 date: 2017-09-10 20:32:15
-tags: 纹理格式,手游开发
+tags: 
+- 纹理
+- 游戏
 published: true
 reward: true
 ---

@@ -1,7 +1,10 @@
 ---
 title: Unity骨骼动画学习
 date: 2019-08-13 21:44:39
-tags: UNITY,骨骼,动画
+tags: 
+- Unity
+- 骨骼
+- 动画
 ---
 
 
