@@ -6,7 +6,7 @@ tags:
 # Shader插件 VSCode
 ## 0、推荐原因
 可以i很快的验证一些渲染问题。
-
+<!-- more -->
 
 ## 1、ShaderToy网址
 https://www.shadertoy.com/view/4dXGR4
